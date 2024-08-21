@@ -1,0 +1,75 @@
+1. Search in Rotated Sorted Array II(LC-81)
+T.C:O(N long N)
+S.C:O(1)
+
+class Solution {
+    public boolean search(int[] arr, int target) {
+    int left=0;
+    int right=arr.length-1;
+    while(left<=right){
+        int mid=left+(right-left)/2;
+        if(arr[mid]==target)return true;
+        if(arr[mid]==arr[left] && arr[mid]==arr[right]){
+            left++;
+            right--;
+            continue;
+        }
+        if(arr[left]<=arr[mid]){
+           if(arr[left]<=target && target<=arr[mid]){
+            right=mid-1;
+           }
+           else
+           left=mid+1;
+        }
+        else{
+            if(arr[mid]<=target && target<=arr[right]){
+                left=mid+1;
+            }
+            else
+            right=mid-1;
+        }
+    }
+    return false;
+    }
+    }
+------------------------------------------------------------------------------------------
+
+2.Smallest Positive missing
+T.C: O(N)
+S.C:O(1)
+
+class Solution
+{
+    //Function to find the smallest positive number missing from the array.
+    public static int segregate(int arr[] , int n){
+        int index=0;
+        for(int i=0;i<n;i++){
+        if(arr[i]>0){
+            int temp=arr[i];
+            arr[i]=arr[index];
+            arr[index]=temp;
+            index++;
+        }
+        }
+        return index;
+    }
+    static int missingNumber(int arr[], int size)
+    {
+      int k=segregate(arr,size);
+      for(int i=0;i<k;i++){
+          int val=Math.abs(arr[i]);
+          if(val-1<k && arr[val-1]>0){
+              arr[val-1]=-arr[val-1];
+          }
+      }
+      for(int i=0;i<k;i++){
+          if(arr[i]>0){
+              return i+1;
+          }
+      }
+      return k+1;
+      
+    }
+}
+
+---------------------------------------------------
