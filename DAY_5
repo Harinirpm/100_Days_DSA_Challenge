@@ -1,0 +1,37 @@
+Two sum:
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> numToIndex = new HashMap<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (numToIndex.containsKey(complement)) {
+                return new int[]{numToIndex.get(complement), i};
+            }
+            numToIndex.put(nums[i], i);
+        }
+        
+        throw new IllegalArgumentException("No two sum solution");
+    }
+}-----------------------------------------------------------------------------
+
+Max Consecutive ones:-
+--------------------
+
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int n=nums.length;
+        int count=0;
+        int maxLen=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]==1){
+                count++;
+                maxLen=Math.max(maxLen,count);
+            }
+            else if(nums[i]==0){
+                count=0;
+            }
+        }
+        return maxLen;
+    }
+}
