@@ -1,0 +1,23 @@
+Longest SubArray with Sum K:
+---------------------------------
+class Solution{
+    public static int lenOfLongSubarr (int A[], int a, int k) {
+      int currSum = 0;
+        int maxLen = 0;
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for (int i = 0; i < A.length; i++) {
+            currSum += A[i];
+            if (currSum == k) {
+                maxLen = i + 1;
+            }
+            if (hm.containsKey(currSum - k)) {
+                maxLen = Math.max(maxLen, i - hm.get(currSum - k));
+            }
+            if (!hm.containsKey(currSum)) {
+                hm.put(currSum, i); 
+            }
+        }
+        return maxLen;
+    }
+    
+}
