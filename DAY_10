@@ -1,0 +1,37 @@
+InterchangeableRectangles:-
+LC-2001
+-------------------------------
+class Solution {
+    public long interchangeableRectangles(int[][] rectangles) {
+        long res=0;
+        int n=rectangles.length;
+        Map<Double,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            double ratio=(double)rectangles[i][0]/(double)rectangles[i][1];
+          res=res+map.getOrDefault(ratio,0);
+          map.put(ratio,map.getOrDefault(ratio,0)+1);
+        }
+        return res;
+    }
+}
+----------------------------------------------------------------------------------------
+
+Number of Good Pairs:-
+LC:1512
+-----------------------
+class Solution {
+    public int numIdenticalPairs(int[] nums) {
+        int len=nums.length;
+        int count=0;
+        for(int i=0;i<len-1;i++){
+            for(int j=i+1;j<len;j++){
+                if(nums[i]==nums[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+-----------------------------------------------------------------------------------------
+
