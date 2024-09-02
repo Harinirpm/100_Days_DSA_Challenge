@@ -1,0 +1,50 @@
+Reverse Pirs:
+LC:493
+--------------------
+class Solution {
+    private int merger(int[] nums, int start,int mid, int end){
+        int left=start,right=mid+1;
+        int j=mid+1,pc=0;
+        for(int i=start;i<=mid;i++){
+            while(j<=end && nums[i] > (long) 2* nums[j]){
+                j++;
+            }
+            pc=pc+j-(mid+1);
+        }
+        List<Integer>res=new ArrayList<>();
+        while(left<=mid && right <=end){
+            if(nums[left] < nums[right])
+            res.add(nums[left++]);
+            else
+            res.add(nums[right++]);
+        }
+        while(left<=mid){
+            res.add(nums[left++]);
+        }
+        while(right<=end){
+           res.add(nums[right++]);
+        }
+        for(int i=start;i<=end;i++){
+        nums[i]= res.get(i-start);
+        }
+        return pc;
+    }
+    private int mergeSort(int[] nums, int left, int right){
+        if(left<right){
+            int count=0;
+        int mid=left+(right-left)/2;
+           count+= mergeSort(nums,left,mid);
+            count+= mergeSort(nums,mid+1,right);
+           count+=  merger(nums,left,mid,right);
+
+        return count;
+        }
+        return 0;
+    }
+    public int reversePairs(int[] nums) {
+        int n=nums.length;
+        int left=0;
+        return  mergeSort(nums, 0, n-1);
+      
+    }
+}
