@@ -1,0 +1,27 @@
+Valid parathesis:
+LC:20
+---------------------
+class Solution {
+    public boolean isValid(String s) {
+        char[] arr=s.toCharArray();
+        int n=arr.length;
+        Stack<Character>st=new Stack<>();
+        int i=0;
+        for(char c:arr){
+            if(c=='('){
+            st.push(')');
+            }
+            else if(c=='{'){
+                st.push('}');
+            }
+            else if(c=='['){
+                st.push(']');
+            }
+            else if(st.isEmpty() || st.pop()!=c){
+                return false;
+            }
+            
+        }
+        return st.isEmpty();
+}
+}
