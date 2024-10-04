@@ -1,0 +1,41 @@
+Insert a node in DLL:
+GFG
+--------------------
+
+class Solution {
+   
+    Node addNode(Node head, int p, int x) {
+       Node node = new Node(x);
+       if (p == 0) {
+            node.next = head;
+            if (head != null) {
+                head.prev = node;
+            }
+            return node;
+        }
+        Node temp = head;
+        for (int i = 0; i <= p; i++) {
+            if (temp == null) {
+                return head;
+            }
+            temp = temp.next;
+        }
+        if (temp == null) {
+            Node tail = head;
+            while (tail.next != null) {
+                tail = tail.next;
+            }
+            tail.next = node;
+            node.prev = tail;
+            return head;
+        }
+        node.next = temp; 
+        node.prev = temp.prev; 
+        if (temp.prev != null) {
+            temp.prev.next = node; 
+            }
+        
+        temp.prev = node;  
+        return head;  
+    }
+}
